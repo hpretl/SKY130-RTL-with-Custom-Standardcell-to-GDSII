@@ -152,7 +152,7 @@ write dac_tb.raw
 .endc
 "}
 C {devices/lab_wire.sym} 100 -520 0 0 {name=l39 sig_type=std_logic lab=clk_500k}
-C {/foss/designs/SKY130-RTL-with-Custom-Standardcell-to-GDSII/examples/3b_DAC_AMS/xschem/dac.sym} 860 -500 0 0 {name=x1}
+C {dac.sym} 860 -500 0 0 {name=x1}
 C {devices/gnd.sym} 30 -320 0 0 {name=l2 lab=GND}
 C {devices/gnd.sym} 250 -320 0 0 {name=l3 lab=GND}
 C {devices/vdd.sym} 30 -230 0 0 {name=l5 lab=VDD}
