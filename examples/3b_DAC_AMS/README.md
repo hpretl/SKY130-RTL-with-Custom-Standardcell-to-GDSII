@@ -25,14 +25,10 @@ Example for an Aanalog-Mixed-Signal (AMS) simulation with ngspice using a 3b-DAC
 - Folder: 3b_DAC_AMS/spice/
 - Run: python3 spi2xspice.py $PDKPATH/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib -io_time=500p -time=50p -idelay=5p -odelay=50p -cload=250f counter.spice counter.xspice
 ### Simulation
-<<<<<<< HEAD
-Make a xschem symbol, adjust the pin order to the order of your netlist file and set the symbol type to type=primitive.
-Add .include <pathtoyourdesign>/spice/counter.xspice statement to ngspice for a mixed-signal or .include <pathtoyourdesign>/spice/counter.spice for an analog simulation.
-
-# Further Information
-[1] https://github.com/iic-jku/SKY130_SAR-ADC1/blob/main/doc/mixed_signal_simulation.md
-[2] http://opencircuitdesign.com/qflow/
-=======
 - Make a xschem symbol, adjust the pin order to the order of your netlist file and set the symbol type to type=primitive.
 - Add .include [pathtoyourdesign]/spice/counter.xspice statement to ngspice for a mixed-signal or .include [pathtoyourdesign]/spice/counter.spice for an analog simulation.
->>>>>>> 5ff5a89fc7b5b6bbb749bdb94986785ba5d953f3
+
+## Further Information
+[1] https://github.com/iic-jku/SKY130_SAR-ADC1/blob/main/doc/mixed_signal_simulation.md
+
+[2] http://opencircuitdesign.com/qflow/
