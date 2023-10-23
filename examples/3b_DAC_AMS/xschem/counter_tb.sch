@@ -36,7 +36,7 @@ N 470 -380 480 -380 {
 lab=rst_n}
 N 470 -400 480 -400 {
 lab=clk_500k}
-N 730 -390 740 -390 {
+N 670 -390 680 -390 {
 lab=cnt_[0..2]}
 N 720 -300 720 -280 {
 lab=GND}
@@ -86,7 +86,7 @@ N 830 -360 830 -340 {
 lab=cnt_1}
 N 750 -360 750 -340 {
 lab=cnt_2}
-N 740 -390 760 -390 {
+N 680 -390 700 -390 {
 lab=cnt_[0..2]}
 N 210 -400 470 -400 {
 lab=clk_500k}
@@ -97,7 +97,7 @@ lab=rst_n}
 N 410 -380 410 -330 {
 lab=rst_n}
 C {devices/title.sym} 170 -40 0 0 {name=l6 author="Patrick Fath"}
-C {devices/code.sym} 0 -200 0 0 {name=COMMANDS
+C {devices/code.sym} 130 -200 0 0 {name=COMMANDS
 simulator=ngspice
 only_toplevel=false 
 value="
@@ -105,28 +105,28 @@ value="
 ****************
 * True mixed signal? (xspice) or analog? (spice)
 ****************
-.include /foss/designs/AMS_Test/spice/counter.xspice
-*.include /foss/designs/AMS_Test/spice/counter.spice
+.include /foss/designs/SKY130-RTL-with-Custom-Standardcell-to-GDSII/examples/3b_DAC_AMS/spice/counter.xspice
+*.include /foss/designs/SKY130-RTL-with-Custom-Standardcell-to-GDSII/examples/3b_DAC_AMS/spice/counter.spice
 
 .save all
 .control
 set num_threads=12
-tran 100n 20u
+tran 10n 20u
 
 write counter_tb.raw
 
 .endc
 "}
 C {counter.sym} 630 -270 0 0 {name=xdut}
-C {devices/gnd.sym} 590 -340 0 0 {name=l1 lab=GND}
-C {devices/vdd.sym} 590 -440 0 0 {name=l1 lab=VDD}
+C {devices/gnd.sym} 570 -340 0 0 {name=l1 lab=GND}
+C {devices/vdd.sym} 570 -440 0 0 {name=l1 lab=VDD}
 C {devices/vsource.sym} 30 -290 0 0 {name=V_VDD value=1.8}
 C {devices/gnd.sym} 30 -260 0 0 {name=l1 lab=GND}
 C {devices/vdd.sym} 30 -320 0 0 {name=l1 lab=VDD}
 C {devices/lab_wire.sym} 210 -400 0 0 {name=l8 sig_type=std_logic lab=clk_500k}
 C {devices/lab_wire.sym} 410 -380 0 0 {name=l9 sig_type=std_logic lab=rst_n}
 C {devices/vsource.sym} 210 -350 0 0 {name=V_CLK value="0 pulse(1.8 0 0 100p 100p 1u 2u)"}
-C {sky130_fd_pr/corner.sym} 130 -200 0 0 {name=CORNER only_toplevel=false corner=tt}
+C {sky130_fd_pr/corner.sym} 10 -200 0 0 {name=CORNER only_toplevel=false corner=tt}
 C {devices/gnd.sym} 210 -320 0 0 {name=l7 lab=GND}
 C {devices/vsource.sym} 410 -300 0 0 {name=V_RST value="0 pulse(1.8 0 2u 100p 100p 2u 2)"}
 C {devices/gnd.sym} 410 -270 0 0 {name=l4 lab=GND}
@@ -178,11 +178,14 @@ spiceprefix=X
 }
 C {devices/lab_wire.sym} 910 -360 0 1 {name=l14 sig_type=std_logic lab=cnt_0}
 C {devices/gnd.sym} 910 -220 0 0 {name=l15 lab=GND}
-C {devices/lab_wire.sym} 740 -390 0 1 {name=l10 sig_type=std_logic lab=cnt_[0..2]}
-C {devices/launcher.sym} 1360 -70 0 0 {name=h2 
+C {devices/lab_wire.sym} 680 -390 0 1 {name=l10 sig_type=std_logic lab=cnt_[0..2]}
+C {devices/launcher.sym} 350 -120 0 0 {name=h1 
 descr="Load/unload
 TRAN waveforms" 
 tclcommand="
 xschem raw_read $netlist_dir/counter_tb.raw tran
 "
 }
+C {devices/launcher.sym} 350 -170 0 0 {name=h2 
+descr="Simulate" 
+tclcommand="xschem netlist; xschem simulate"}

@@ -97,39 +97,27 @@ N 1110 -480 1110 -400 {
 lab=GND}
 N 1110 -540 1110 -520 {
 lab=dac_o}
-C {devices/code.sym} 150 -240 0 0 {name=TT_MODELS
-only_toplevel=true
-format="tcleval( @value )"
-value="** manual skywater pdks install (with patches applied)
-* .lib \\\\$::SKYWATER_MODELS\\\\/models/sky130.lib.spice tt
-
-** opencircuitdesign pdks install
-.lib \\\\$::SKYWATER_MODELS\\\\/sky130.lib.spice.tt.red tt
-
-.param mc_mm_switch=0
-.param mc_pr_switch=0
-"
-spice_ignore=false}
-C {devices/launcher.sym} 480 -210 0 0 {name=h2 
+C {sky130_fd_pr/corner.sym} 10 -240 0 0 {name=CORNER only_toplevel=false corner=tt}
+C {devices/launcher.sym} 340 -210 0 0 {name=h2 
 descr="Simulate" 
 tclcommand="xschem netlist; xschem simulate"}
-C {devices/vsource.sym} 30 -200 0 0 {name=Vdd value=1.8
+C {devices/vsource.sym} 500 -350 0 0 {name=Vdd value=1.8
 }
-C {devices/gnd.sym} 30 -170 0 0 {name=l4 lab=GND}
+C {devices/gnd.sym} 500 -320 0 0 {name=l4 lab=GND}
 C {devices/title.sym} 160 -30 0 0 {name=l1 author="Patrick Fath"}
 C {counter.sym} 470 -390 0 0 {name=xcnt}
 C {devices/lab_wire.sym} 250 -500 0 0 {name=l42 sig_type=std_logic lab=rst_n}
 C {devices/vsource.sym} 30 -350 0 0 {name=V_CLK value="0 pulse(1.8 0 0 100p 100p 1u 2u)"}
 C {devices/vsource.sym} 250 -350 0 0 {name=V_RST value="0 pulse(1.8 0 2u 100p 100p 2u 2)"}
 C {devices/lab_wire.sym} 520 -510 0 1 {name=l45 sig_type=std_logic lab=dac_i_[0..2]}
-C {devices/launcher.sym} 480 -160 0 0 {name=h1 
+C {devices/launcher.sym} 340 -160 0 0 {name=h1 
 descr="Load/unload
 TRAN waveforms" 
 tclcommand="
 xschem raw_read $netlist_dir/dac_tb.raw tran
 "
 }
-C {devices/code.sym} 270 -240 0 0 {name=COMMANDS
+C {devices/code.sym} 130 -240 0 0 {name=COMMANDS
 simulator=ngspice
 only_toplevel=false 
 value="
@@ -137,8 +125,8 @@ value="
 ****************
 * True mixed signal? (xspice) or analog? (spice)
 ****************
-*.include /foss/designs/SKY130-RTL-with-Custom-Standardcell-to-GDSII/examples/3b_DAC_AMS/spice/counter.xspice
-.include /foss/designs/SKY130-RTL-with-Custom-Standardcell-to-GDSII/examples/3b_DAC_AMS/spice/counter.spice
+.include /foss/designs/SKY130-RTL-with-Custom-Standardcell-to-GDSII/examples/3b_DAC_AMS/spice/counter.xspice
+*.include /foss/designs/SKY130-RTL-with-Custom-Standardcell-to-GDSII/examples/3b_DAC_AMS/spice/counter.spice
 
 .save all
 .control
@@ -155,7 +143,7 @@ C {devices/lab_wire.sym} 100 -520 0 0 {name=l39 sig_type=std_logic lab=clk_500k}
 C {dac.sym} 860 -500 0 0 {name=x1}
 C {devices/gnd.sym} 30 -320 0 0 {name=l2 lab=GND}
 C {devices/gnd.sym} 250 -320 0 0 {name=l3 lab=GND}
-C {devices/vdd.sym} 30 -230 0 0 {name=l5 lab=VDD}
+C {devices/vdd.sym} 500 -380 0 0 {name=l5 lab=VDD}
 C {devices/vdd.sym} 410 -560 0 0 {name=l6 lab=VDD}
 C {devices/gnd.sym} 410 -460 0 0 {name=l7 lab=GND}
 C {devices/vdd.sym} 690 -560 0 0 {name=l8 lab=VDD}
