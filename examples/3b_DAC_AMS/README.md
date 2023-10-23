@@ -27,3 +27,7 @@ Run: python3 spi2xspice.py $PDKPATH/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd
 ### Simulation
 Make a xschem symbol, adjust the pin order to the order of your netlist file and set the symbol type to type=primitive.
 Add .include <pathtoyourdesign>/spice/counter.xspice statement to ngspice for a mixed-signal or .include <pathtoyourdesign>/spice/counter.spice for an analog simulation.
+
+# Further Information
+[1] https://github.com/iic-jku/SKY130_SAR-ADC1/blob/main/doc/mixed_signal_simulation.md
+[2] http://opencircuitdesign.com/qflow/
