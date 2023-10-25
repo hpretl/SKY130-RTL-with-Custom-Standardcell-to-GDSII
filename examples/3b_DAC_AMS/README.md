@@ -13,7 +13,21 @@ Example for an Aanalog-Mixed-Signal (AMS) simulation with ngspice using a 3b-DAC
 - Run: vvp dump.vvp > dump.log
 - Run: gtkwave dump.vcd
 
-## Mixed-Signal Simulation
+## Mixed-Signal Simulation Variant 1 (Yosys)
+### Verilog RTL to SKY130 standard cell .spice netlist using Yosys
+- Folder: 3b_DAC_AMS/yosys
+- Run: yosys synth.ys
+- Run: vlog2Verilog counter.v -o counter.vp -l $PDKPATH/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef -v "VPWR,VPB" -g "VGND,VNB"
+- Run: vlog2Spice counter.vp -l $PDKPATH/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice -o counter.spice
+- Copy this file to 3b_DAC_AMS/spice/counter.spice.
+### SKY130 standard cell .spice netlist to behaviour .xspice netlist
+- Folder: 3b_DAC_AMS/spice/
+- Run: spi2xspice.py $PDKPATH/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib -io_time=500p -time=50p -idelay=5p -odelay=50p -cload=250f counter.spice counter.xspice
+### Simulation
+- Make a xschem symbol, adjust the pin order to the order of your netlist file and set the symbol type to type=primitive.
+- Add .include [pathtoyourdesign]/spice/counter.xspice statement to ngspice for a mixed-signal or .include [pathtoyourdesign]/spice/counter.spice for an analog simulation.
+
+## Mixed-Signal Simulation Variant 2 (OpenLane)
 ### Verilog RTL to SKY130 standard cell .spice netlist using OpenLane
 - Folder: 3b_DAC_AMS/openlane
 - Setup a minimal OpenLane project before!
@@ -23,7 +37,7 @@ Example for an Aanalog-Mixed-Signal (AMS) simulation with ngspice using a 3b-DAC
 - Copy this file to 3b_DAC_AMS/spice/counter.spice.
 ### SKY130 standard cell .spice netlist to behaviour .xspice netlist
 - Folder: 3b_DAC_AMS/spice/
-- Run: python3 spi2xspice.py $PDKPATH/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib -io_time=500p -time=50p -idelay=5p -odelay=50p -cload=250f counter.spice counter.xspice
+- Run: spi2xspice.py $PDKPATH/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib -io_time=500p -time=50p -idelay=5p -odelay=50p -cload=250f counter.spice counter.xspice
 ### Simulation
 - Make a xschem symbol, adjust the pin order to the order of your netlist file and set the symbol type to type=primitive.
 - Add .include [pathtoyourdesign]/spice/counter.xspice statement to ngspice for a mixed-signal or .include [pathtoyourdesign]/spice/counter.spice for an analog simulation.
