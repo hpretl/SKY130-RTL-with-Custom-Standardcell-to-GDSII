@@ -1,0 +1,21 @@
+# read design
+read -sv ../verilog/rtl/counter.v
+hierarchy -top counter
+
+# the high-level stuff
+proc; fsm; opt; memory; opt
+
+# mapping to internal cell library
+techmap; opt
+
+# mapping flip-flops to sky130_fd_sc_hd__tt_025C_1v80.lib
+dfflibmap -liberty /foss/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+# mapping logic to sky130_fd_sc_hd__tt_025C_1v80.lib
+abc -liberty /foss/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+# cleanup
+clean
+
+# write verilog file
+write_verilog counter.v
